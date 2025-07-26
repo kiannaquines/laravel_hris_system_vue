@@ -28,6 +28,9 @@ const submit = () => {
 };
 
 const githubLogin = () => {
+    // Add Loading state if needed
+    form.processing = true;
+    // Redirect to the GitHub login route
     window.location.href = route('github.login')
 }
 </script>
@@ -81,8 +84,9 @@ const githubLogin = () => {
                 <TextLink :href="route('register')" :tabindex="5">Sign up</TextLink>
             </div>
 
-            <Button @click="githubLogin" type="button" class="w-full" :tabindex="4">
-                <Github class="mr-2 h-4 w-4" />
+            <Button variant="outline" @click="githubLogin" type="button" class="w-full" :disabled="form.processing">
+                <LoaderCircle v-if="form.processing" class="h-4 w-4 animate-spin mr-2" />
+                <Github v-else="form.processing" class="mr-2 h-4 w-4" />
                 Log in with
                 Github
             </Button>

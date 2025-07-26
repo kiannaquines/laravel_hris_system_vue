@@ -2,14 +2,19 @@ import vue from '@vitejs/plugin-vue';
 import laravel from 'laravel-vite-plugin';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vite';
+import fs from 'fs';
 
 export default defineConfig({
     server: {
-        host: '192.168.1.9',
+        https: {
+            key: fs.readFileSync('./certs/hris.test-key.pem'),
+            cert: fs.readFileSync('./certs/hris.test-cert.pem'),
+        },
+        host: 'hris.test',
         port: 5173,
         strictPort: true,
         hmr: {
-            host: '192.168.1.9',
+            host: 'hris.test',
         },
         headers: {
             'Access-Control-Allow-Origin': '*',
