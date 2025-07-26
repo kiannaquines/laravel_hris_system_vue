@@ -35,4 +35,11 @@ return [
         ],
     ],
 
+    // Oauth2 services
+    'github' => [
+        'client_id' => env('GITHUB_CLIENT_ID'),
+        'client_secret' => env('GITHUB_CLIENT_SECRET'),
+        'redirect' => 'http://192.168.1.9:8000/auth/github/callback',
+    ],
+
 ];
