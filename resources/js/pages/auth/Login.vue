@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import AuthBase from '@/layouts/AuthLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
-import { LoaderCircle, Github } from 'lucide-vue-next';
+import { LoaderCircle, Github, Facebook } from 'lucide-vue-next';
 import { route } from 'ziggy-js';
 
 defineProps<{
@@ -32,6 +32,13 @@ const githubLogin = () => {
     form.processing = true;
     // Redirect to the GitHub login route
     window.location.href = route('github.login')
+}
+
+const facebookLogin = () => {
+    // Add Loading state if needed
+    form.processing = true;
+    // Redirect to the Facebook login route
+    window.location.href = route('facebook.login')
 }
 </script>
 
@@ -89,6 +96,13 @@ const githubLogin = () => {
                 <Github v-else="form.processing" class="mr-2 h-4 w-4" />
                 Log in with
                 Github
+            </Button>
+
+            <Button variant="outline" @click="facebookLogin" type="button" class="w-full" :disabled="form.processing">
+                <LoaderCircle v-if="form.processing" class="h-4 w-4 animate-spin mr-2" />
+                <Facebook v-else="form.processing" class="mr-2 h-4 w-4" />
+                Log in with
+                Facebook
             </Button>
         </form>
     </AuthBase>
