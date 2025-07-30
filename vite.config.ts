@@ -5,11 +5,11 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
     server: {
-        host: 'localhost',
+        host: process.env.APP_ADDRESS,
         port: 5173,
         strictPort: true,
         hmr: {
-            host: 'localhost',
+            host: process.env.APP_ADDRESS,
         },
         headers: {
             'Access-Control-Allow-Origin': '*',

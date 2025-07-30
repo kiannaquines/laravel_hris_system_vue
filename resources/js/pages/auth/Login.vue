@@ -15,6 +15,9 @@ defineProps<{
     canResetPassword: boolean;
 }>();
 
+let githubLoginProcessing = false;
+let facebookLoginProcessing = false;
+
 const form = useForm({
     email: '',
     password: '',
@@ -28,16 +31,12 @@ const submit = () => {
 };
 
 const githubLogin = () => {
-    // Add Loading state if needed
-    form.processing = true;
-    // Redirect to the GitHub login route
+    githubLoginProcessing = true;
     window.location.href = route('github.login')
 }
 
 const facebookLogin = () => {
-    // Add Loading state if needed
-    form.processing = true;
-    // Redirect to the Facebook login route
+    facebookLoginProcessing = true;
     window.location.href = route('facebook.login')
 }
 </script>
@@ -91,16 +90,18 @@ const facebookLogin = () => {
                 <TextLink :href="route('register')" :tabindex="5">Sign up</TextLink>
             </div>
 
-            <Button variant="outline" @click="githubLogin" type="button" class="w-full" :disabled="form.processing">
-                <LoaderCircle v-if="form.processing" class="h-4 w-4 animate-spin mr-2" />
-                <Github v-else="form.processing" class="mr-2 h-4 w-4" />
+            <Button variant="outline" @click="githubLogin" type="button" class="w-full"
+                :disabled="githubLoginProcessing">
+                <LoaderCircle v-if="githubLoginProcessing" class="h-4 w-4 animate-spin mr-2" />
+                <Github v-else="githubLoginProcessing" class="mr-2 h-4 w-4" />
                 Log in with
                 Github
             </Button>
 
-            <Button variant="outline" @click="facebookLogin" type="button" class="w-full" :disabled="form.processing">
-                <LoaderCircle v-if="form.processing" class="h-4 w-4 animate-spin mr-2" />
-                <Facebook v-else="form.processing" class="mr-2 h-4 w-4" />
+            <Button variant="outline" @click="facebookLogin" type="button" class="w-full"
+                :disabled="facebookLoginProcessing">
+                <LoaderCircle v-if="facebookLoginProcessing" class="h-4 w-4 animate-spin mr-2" />
+                <Facebook v-else="facebookLoginProcessing" class="mr-2 h-4 w-4" />
                 Log in with
                 Facebook
             </Button>
